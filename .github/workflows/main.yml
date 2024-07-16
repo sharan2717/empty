@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Request approval for production deployment
         id: approval
-        uses: juliangruber/approve-action@v1.1.0
+        uses: juliangruber/approve-pull-request-action@v2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
