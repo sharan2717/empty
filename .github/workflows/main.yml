@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Request approval for production deployment
         id: approval
-        uses: sharan2717/approve-action@v1.1.0
+        uses: juliangruber/approve-action@v1.1.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
