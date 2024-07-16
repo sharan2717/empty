@@ -22,6 +22,8 @@ jobs:
 
   prod-approval:
     runs-on: ubuntu-latest
+    outputs:
+     approved: ${{ steps.approval.outputs.approved }}
     steps:
       - name: Request approval for production deployment
         id: approval
@@ -32,7 +34,7 @@ jobs:
   deploy-prod:
     runs-on: ubuntu-latest
     needs: prod-approval
-    if: ${{ steps.approval.outputs.approved == 'true' }}
+    if: ${{ needs.prod-approval.outputs.approved == 'true' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
