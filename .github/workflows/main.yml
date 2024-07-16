@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        run:  echo "My secret value is ${{ secrets.MY_SECRET }}"
+        run:  echo "My secret value is ${{ secrets.GITHUBTOKEN }}"
 
   prod-approval:
     runs-on: ubuntu-latest
