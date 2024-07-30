@@ -6,9 +6,7 @@ on:
       environment:
         description: 'Environment to deploy to'
         required: true
-      tag:
-        description: 'Tag for deployment'
-        required: false
+
 
 jobs:
   deploy:
