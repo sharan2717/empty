@@ -1,0 +1,24 @@
+name: Called Workflow
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+      tag:
+        description: 'Tag for deployment'
+        required: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Deploy
+      run: |
+        echo "Deploying to environment: ${{ inputs.environment }}"
+        echo "Tag: ${{ inputs.tag }}"
