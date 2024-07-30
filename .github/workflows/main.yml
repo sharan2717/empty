@@ -26,6 +26,6 @@ jobs:
   call_another :
      uses: ./.github/workflows/call.yml
      with :
-       environment : "from main"
-       tag : "27.17.09"
+       environment : from main
+       tag : 27.17.09
   
