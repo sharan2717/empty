@@ -23,3 +23,9 @@ jobs:
       run: |
         echo "Environment: ${{ github.event.inputs.environment }}"
         echo "Tag: ${{ github.event.inputs.tag }}"
+  call_another :
+     uses: ./.github/workflows/call.yml
+     with :
+       environment : "from main"
+       tag : "27.17.09"
+  
