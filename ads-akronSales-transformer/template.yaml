@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+    Lamda Local Testing with AWS SAM CLI
+  
+Globals:
+  Function:
+    Environment:
+      Variables:
+        NODE_ENV: test
+        INTERFACE_KEY: sap-car-sales-audit-export-producer
+        INTERFACE_KEY_DFD: sap-car-dfd
+        SAMS_SECRET_ARN: arn:aws:secretsmanager:us-east-2:611370861527:secret:esi/interface/sap-car-nEfFmi
+        AWS_SAMS_URL: https://esi.test.cloud.jewels.com/sams/api/v1/async-message-api
+        ESI_TRACKER_API_URL: https://console.esi.test.cloud.jewels.com
+        ESI_API_VERSION: api/v1
+        AWS_CURRENT_REGION: us-east-2
+        CONSUMER_DATA_CACHE:  https://console.esi.test.cloud.jewels.com/api/v1/consumer-cache
+        GENESIS_BUCKET_NAME : signet-esi-test-inbound-files-bucket
+        GENESIS_BUCKET_KEY : genesis/Inbound/SETTLEMENT.RETAIL.ZALE.csv
+        GENESIS_FILE_KEY : genesis/Inbound
+        ESI_BARC_API: https://tw0yu0u3ui.execute-api.us-east-2.amazonaws.com/esi/file-import
+Resources:
+  ApiGatewayFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: dist/
+      Handler: index.handler
+      Runtime: nodejs14.x
+      Timeout: 900
+
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /sales-importer
+            Method: post

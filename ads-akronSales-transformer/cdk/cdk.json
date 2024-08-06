@@ -1,0 +1,345 @@
+{
+  "app": "python3 app.py",
+  "watch": {
+    "include": [
+      "**"
+    ],
+    "exclude": [
+      "README.md",
+      "cdk*.json",
+      "requirements*.txt",
+      "source.bat",
+      "**/__init__.py",
+      "python/__pycache__",
+      "tests"
+    ]
+  },
+  "context": {
+    "@aws-cdk/aws-apigateway:usagePlanKeyOrderInsensitiveId": true,
+    "@aws-cdk/core:stackRelativeExports": true,
+    "@aws-cdk/aws-rds:lowercaseDbIdentifier": true,
+    "@aws-cdk/aws-lambda:recognizeVersionProps": true,
+    "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": true,
+    "@aws-cdk-containers/ecs-service-extensions:enableDefaultLogDriver": true,
+    "@aws-cdk/aws-ec2:uniqueImdsv2TemplateName": true,
+    "@aws-cdk/core:checkSecretUsage": true,
+    "@aws-cdk/aws-iam:minimizePolicies": true,
+    "@aws-cdk/core:target-partitions": [
+      "aws",
+      "aws-cn"
+    ],
+    "dev": {
+      "appName": "esi-ads-akronSales-transformer",
+      "account": "481270058004",
+      "region": "us-east-2",
+      "environ": "dev",
+      "appPrefix": "frwk",
+      "appSetting": {
+        "network": {
+          "vpcId": "vpc-0520680d370425695",
+          "subnets": {
+            "subnetId1": "subnet-0f40c42fe70359972",
+            "subnetId2": "subnet-09de6516bf9432bfc"
+          }
+        },
+        "lambdaApp": {
+          "lambdaConfig": {
+            "name": "esi-ads-akronSales-transformer",
+            "runtime": "nodejs20.x",
+            "memorySize": 256,
+            "apiVersion": "v1",
+            "description": "PLN: ESI Integration Platform - ads Akron Sales transformer",
+            "routeCategory": "custom-import",
+            "routeApp": "ads",
+            "routeType": "akronSales-transformer",
+            "perm": [
+              {
+                "actions": [
+                  "secretsmanager:DescribeSecret",
+                  "secretsmanager:GetSecretValue"
+                ],
+                "resources": [
+                  "arn:aws:secretsmanager:us-east-2:481270058004:secret:esi/interface/ads/oauth-D6wMOY"
+                ]
+              },
+              {
+                "actions": [
+                  "s3:GetObject",
+                  "s3:PutObject"
+                ],
+                "resources": [
+                  "arn:aws:s3:::signet-esi-dev-barc-filevault-s3/*"
+                ]
+              },
+              {
+                "actions": [
+                  "kms:DescribeKey",
+                  "kms:ListAliases",
+                  "kms:ListKeys",
+                  "kms:Decrypt",
+                  "kms:GenerateDataKey"
+                ],
+                "resources": [
+                  "arn:aws:kms:us-east-2:481270058004:key/90dd4c5e-cd15-4d0b-8c12-eb34bbcd70bc",
+                  "arn:aws:kms:us-east-2:481270058004:key/9922fae9-3828-4023-9da5-27bc078821dc",
+                  "arn:aws:kms:us-east-2:481270058004:key/cf6f6749-ce63-4805-94b6-09fd66a8facb"
+                ]
+              },
+              {
+                "actions": [
+                  "ssm:GetParametersByPath",
+                  "ssm:GetParameters",
+                  "ssm:GetParameter"
+                ],
+                "resources": [
+                  "arn:aws:ssm:us-east-2:481270058004:parameter/esi/interface/adsAkron"
+                ]
+              }
+            ],
+            "env": {
+              "NODE_ENV": "development",
+              "NAME": "esi-ads-akronSales-transformer",
+              "INTERFACE_KEY": "ads_akronSales_consumer",
+              "AWS_CURRENT_REGION": "us-east-2",
+              "PARAMETER_NAME": "/esi/interface/adsAkron"
+            }
+          }
+        }
+      }
+    },
+    "test": {
+      "appName": "esi-ads-akronSales-transformer",
+      "account": "611370861527",
+      "region": "us-east-2",
+      "environ": "test",
+      "appPrefix": "frwk",
+      "appSetting": {
+        "network": {
+          "vpcId": "vpc-02fb954019a885d46",
+          "subnets": {
+            "subnetId1": "subnet-0a911906320f4b890",
+            "subnetId2": "subnet-0cac048c646cf967f"
+          }
+        },
+        "lambdaApp": {
+          "lambdaConfig": {
+            "name": "esi-ads-akronSales-transformer",
+            "runtime": "nodejs20.x",
+            "memorySize": 256,
+            "apiVersion": "v1",
+            "description": "ESI Integration Platform - ads Akron Sales transformer",
+            "routeCategory": "custom-import",
+            "routeApp": "ads",
+            "routeType": "akronSales-transformer",
+            "perm": [
+              {
+                "actions": [
+                  "secretsmanager:DescribeSecret",
+                  "secretsmanager:GetSecretValue"
+                ],
+                "resources": [
+                  "arn:aws:secretsmanager:us-east-2:611370861527:secret:esi/interface/progressive/oauth-EBeMoT"
+                ]
+              },
+              {
+                "actions": [
+                  "s3:GetObject",
+                  "s3:PutObject"
+                ],
+                "resources": [
+                  "arn:aws:s3:::signet-esi-test-barc-filevault-s3/*"
+                ]
+              },
+              {
+                "actions": [
+                  "kms:DescribeKey",
+                  "kms:ListAliases",
+                  "kms:ListKeys",
+                  "kms:Decrypt",
+                  "kms:GenerateDataKey"
+                ],
+                "resources": [
+                  "arn:aws:kms:us-east-2:611370861527:key/34f309c2-e2ba-4c94-b6b2-aacc0c03803b",
+                  "arn:aws:kms:us-east-2:611370861527:key/d993375d-d6b0-41fd-8caf-e9c3d9f583fd",
+                  "arn:aws:kms:us-east-2:611370861527:key/18db4e3b-0adf-44a4-ba71-dbd8e3e63acb"
+                ]
+              },
+              {
+                "actions": [
+                  "ssm:GetParametersByPath",
+                  "ssm:GetParameters",
+                  "ssm:GetParameter"
+                ],
+                "resources": [
+                  "arn:aws:ssm:us-east-2:611370861527:parameter/esi/interface/adsAkron"
+                ]
+              }
+            ],
+            "env": {
+              "NODE_ENVIRONMENT": "test",
+              "NAME": "esi-ads-akronSales-transformer",
+              "INTERFACE_KEY": "ads_akronSales_consumer",
+              "AWS_CURRENT_REGION": "us-east-2",
+              "PARAMETER_NAME": "/esi/interface/adsAkron"
+            }
+          }
+        }
+      }
+    },
+    "stage": {
+      "appName": "esi-ads-akronSales-transformer",
+      "account": "343261398662",
+      "region": "us-east-2",
+      "environ": "stage",
+      "appPrefix": "frwk",
+      "appSetting": {
+        "network": {
+          "vpcId": "vpc-08873a13185c59eae",
+          "subnets": {
+            "subnetId1": "subnet-0a5d03096d87fd93c",
+            "subnetId2": "subnet-08a699043de57cdf5"
+          }
+        },
+        "lambdaApp": {
+          "lambdaConfig": {
+            "name": "esi-ads-akronSales-transformer",
+            "memorySize": 256,
+            "runtime": "nodejs20.x",
+            "apiVersion": "v1",
+            "description": "ESI Integration Platform - ads Akron Sales transformer",
+            "routeCategory": "custom-import",
+            "routeApp": "ads",
+            "routeType": "akronSales-transformer",
+            "perm": [
+              {
+                "actions": [
+                  "kms:DescribeKey",
+                  "kms:ListAliases",
+                  "kms:ListKeys",
+                  "kms:Decrypt",
+                  "kms:GenerateDataKey"
+                ],
+                "resources": [
+                  "arn:aws:kms:us-east-2:343261398662:key/5492b551-24e1-42d6-8284-d0eaaab528dc",
+                  "arn:aws:kms:us-east-2:343261398662:key/79b45f0a-1d72-42ae-9b76-0e4849f074c7",
+                  "arn:aws:kms:us-east-2:343261398662:key/4f0d04a0-39ad-4718-9fd8-1c329d529185"
+                ]
+              },
+              {
+                "actions": [
+                  "secretsmanager:*"
+                ],
+                "resources": [
+                  "arn:aws:secretsmanager:us-east-2:343261398662:secret:esi/interface/ads/oauth-LCpmGm"
+                ]
+              },
+              {
+                "actions": [
+                  "s3:GetObject",
+                  "s3:PutObject"
+                ],
+                "resources": [
+                  "arn:aws:s3:::signet-esi-stage-barc-filevault-s3/*"
+                ]
+              },
+              {
+                "actions": [
+                  "ssm:GetParametersByPath",
+                  "ssm:GetParameters",
+                  "ssm:GetParameter"
+                ],
+                "resources": [
+                  "arn:aws:ssm:us-east-2:343261398662:parameter/esi/interface/adsAkron"
+                ]
+              }
+            ],
+            "env": {
+              "NODE_ENVIRONMENT": "stage",
+              "NAME": "esi-ads-akronSales-transformer",
+              "INTERFACE_KEY": "ads_akronSales_consumer",
+              "AWS_CURRENT_REGION": "us-east-2",
+              "PARAMETER_NAME": "/esi/interface/adsAkron"
+            }
+          }
+        }
+      }
+    },
+    "prod": {
+      "appName": "esi-ads-akronSales-transformer",
+      "account": "355920665683",
+      "region": "us-east-2",
+      "environ": "prod",
+      "appPrefix": "frwk",
+      "appSetting": {
+        "network": {
+          "vpcId": "vpc-0e177f81948f00fd3",
+          "subnets": {
+            "subnetId1": "subnet-07a4aaebe03271d83",
+            "subnetId2": "subnet-037b043a1b032f485"
+          }
+        },
+        "lambdaApp": {
+          "lambdaConfig": {
+            "name": "esi-ads-akronSales-transformer",
+            "memorySize": 256,
+            "runtime": "nodejs20.x",
+            "apiVersion": "v1",
+            "description": "ESI Integration Platform - ads Akron Sales transformer",
+            "routeCategory": "custom-import",
+            "routeApp": "ads",
+            "routeType": "akronSales-transformer",
+            "perm": [
+              {
+                "actions": [
+                  "kms:DescribeKey",
+                  "kms:ListAliases",
+                  "kms:ListKeys",
+                  "kms:Decrypt",
+                  "kms:GenerateDataKey"
+                ],
+                "resources": [
+                  "arn:aws:kms:us-east-2:355920665683:key/f5fa9ce4-402d-4e35-ba30-232bcffa0783",
+                  "arn:aws:kms:us-east-2:355920665683:key/220ff009-8a3d-4b12-bf9c-23fe65b6bc9d"
+                ]
+              },
+              {
+                "actions": [
+                  "secretsmanager:*"
+                ],
+                "resources": [
+                  "arn:aws:secretsmanager:us-east-2:355920665683:secret:esi/sams/token-a0l7mm"
+                ]
+              },
+              {
+                "actions": [
+                  "s3:GetObject",
+                  "s3:PutObject"
+                ],
+                "resources": [
+                  "arn:aws:s3:::signet-esi-prod-barc-filevault-s3/*"
+                ]
+              },
+              {
+                "actions": [
+                  "ssm:GetParametersByPath",
+                  "ssm:GetParameters",
+                  "ssm:GetParameter"
+                ],
+                "resources": [
+                  "arn:aws:ssm:us-east-2:355920665683:parameter/esi/interface/progressiveAkron"
+                ]
+              }
+            ],
+            "env": {
+              "NODE_ENVIRONMENT": "prod",
+              "NAME": "esi-ads-akronSales-transformer",
+              "INTERFACE_KEY": "ads_akronSales_consumer",
+              "AWS_CURRENT_REGION": "us-east-2",
+              "PARAMETER_NAME": "/esi/interface/adsAkron"
+            }
+          }
+        }
+      }
+    }
+  }
+}
