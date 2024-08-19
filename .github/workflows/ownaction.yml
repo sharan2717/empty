@@ -2,7 +2,7 @@ name : calling my own js action
 on :
   workflow_dispatch:
      inputs:
-       name:
+       who-to-greet:
          description: 'Name of the person you want to greet' 
          required: true
          default: 'world'
