@@ -1,0 +1,20 @@
+name : calling my own js action
+on :
+  workflow_dispatch:
+     inputs:
+       name:
+         description: 'Name of the person you want to greet' 
+         required: true
+         default: 'world'
+jobs:
+   hello_world_job:
+       runs-on: ubuntu-latest
+       name : A job to say hello
+       steps: 
+          - name: Hello world action step
+            id: hello
+            uses: sharan2717/hello-world-javascript-action@v1.1
+            with:
+              name: ${{ github.event.inputs.environment }}
+          - name: Get the output time
+            run: echo "The time was ${{ steps.hello.outputs.time }}"
