@@ -1,0 +1,12 @@
+name: calling self action
+on:
+  workflow_dispatch:
+  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: sharan2717/hello-world-javascript-action@main
+        with:
+          who-to-greet: "sharan"
