@@ -1,0 +1,19 @@
+
+name: calling  composite action
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - 
+       name: call composite action
+       id: composite
+       uses: sharan2717/composite_action@main
+       with:
+           input1: "a"
+           input2: "b"
+           input3: "c"
+      - 
+        name: Get the output from the action
+        run: echo "The greeting is ${{ steps.composite.status.time }}"  
